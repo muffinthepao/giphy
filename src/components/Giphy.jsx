@@ -10,13 +10,18 @@ const Giphy = () => {
       const results = await axios(
         "https://api.giphy.com/v1/gifs/search?api_key=Nvzay8HdzAT0WHi6NztEYu4WrN1FQcVY&q=cheeseburgers&limit=1&rating=pg"
       );
-      setGif(results.data.data)
+      setGif(results.data.data[0].images.fixed_height.url)
       console.log(gif)
     };
 
     fetchData();
   }, []);
-  return <div className="gif-image">Gif Image</div>;
+
+  return (
+    <div className="container gif-image">
+      <img src={gif}/>
+    </div>
+  );
 };
 
 export default Giphy;
