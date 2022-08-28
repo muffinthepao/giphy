@@ -11,10 +11,10 @@ function App() {
   const [gifIsLoading, setGifIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("monkey");
 
   //axios works on promises so need to async/await it
-  const fetchInitialGif = async () => {
+  const fetchGif = async () => {
     setGifIsLoading(true);
     setIsError(false);
 
@@ -22,28 +22,7 @@ function App() {
       const results = await axios.get(`https://api.giphy.com/v1/gifs/search`, {
         params: {
           api_key: "Nvzay8HdzAT0WHi6NztEYu4WrN1FQcVY",
-          q: "monkey",
-          limit: 1,
-          rating: "pg",
-        },
-      });
-      setGif(results.data.data[0].images.fixed_height.url);
-      setGifIsLoading(false);
-    } catch (error) {
-      setIsError(true)
-      console.log(error)
-    }
-  };
-
-  const fetchNewGif = async () => {
-    setGifIsLoading(true);
-    setIsError(false);
-
-    try {
-      const results = await axios.get(`https://api.giphy.com/v1/gifs/search`, {
-        params: {
-          api_key: "Nvzay8HdzAT0WHi6NztEYu4WrN1FQcVY",
-          q: "monkey",
+          q: searchQuery,
           limit: 1,
           rating: "pg",
         },
@@ -58,12 +37,13 @@ function App() {
 
   const handleSubmit = (input) => {
     setSearchQuery(input);
-    console.log("searchQuery: ", searchQuery);
+    fetchGif(searchQuery)
+    
   };
 
   //initial load mount
   useEffect(() => {
-    fetchInitialGif();
+    fetchGif();
   }, []);
 
   return (

@@ -6,8 +6,7 @@ const Form = (prop) => {
     //prevent default form behaviour
     e.preventDefault()
 
-    //targets specific element name. in this case it's "query"
-    console.log("after onSubmit: ", e.target.inputQuery.value)
+    //targets specific element name. in this case it's "inputQuery"
     prop.handleSubmit(e.target.inputQuery.value)
   }
   
