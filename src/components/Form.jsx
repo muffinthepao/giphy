@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Form = (prop) => {
 
@@ -8,6 +8,7 @@ const Form = (prop) => {
 
     //targets specific element name. in this case it's "inputQuery"
     prop.handleSubmit(e.target.inputQuery.value)
+    console.log("from Form.jsx: ", e.target.inputQuery.value)
   }
   
   return (
